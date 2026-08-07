@@ -46,7 +46,7 @@ button{cursor:pointer}
   align-items:center;
   justify-content:center;
   padding:0;
-  min-width:190px;
+  min-width:220px;
 }
 
 .nav-logo-wrapper{
@@ -61,9 +61,9 @@ button{cursor:pointer}
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:2.35rem;
+  font-size:2rem;
   font-weight:900;
-  letter-spacing:-6px;
+  letter-spacing:-4px;
   line-height:1;
 }
 
@@ -72,20 +72,20 @@ button{cursor:pointer}
 
 .nav-wifi{
   color:white;
-  font-size:.95rem;
+  font-size:.78rem;
   font-weight:900;
-  letter-spacing:.35em;
-  margin-top:-7px;
+  letter-spacing:.30em;
+  margin-top:4px;
   line-height:1;
   text-align:center;
 }
 
 .nav-tag{
   color:var(--muted);
-  font-size:.55rem;
-  letter-spacing:.18em;
+  font-size:.48rem;
+  letter-spacing:.15em;
   white-space:nowrap;
-  margin-top:4px;
+  margin-top:8px;
   text-transform:uppercase;
   text-align:center;
 }
@@ -474,9 +474,9 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .benefit-grid{grid-template-columns:1fr}
   .portal-logo{font-size:4rem}
   .portal-wifi{font-size:2rem}
-  .nav-logo{font-size:2rem}
-  .nav-wifi{font-size:.8rem}
-  .nav-tag{font-size:.48rem}
+  .nav-logo{font-size:1.85rem}
+  .nav-wifi{font-size:.72rem;margin-top:4px}
+  .nav-tag{font-size:.44rem;margin-top:8px}
   .who-we-help{grid-template-columns:1fr}
   .who-we-help .help-card:nth-child(5){grid-column:auto;max-width:none}
   .three{grid-template-columns:1fr}
