@@ -4,3 +4,42 @@
 .hero-new{display:block;text-align:center}.hero-inner{max-width:1200px;margin:auto}.portal-logo{display:flex;justify-content:center;align-items:center;font-size:5.5rem;font-weight:900;letter-spacing:-13px}.logo-s{color:#FF6A1A}.logo-ring{margin:0 4px}.portal-wifi{margin-top:-15px;color:white;font-size:3rem;font-weight:900;letter-spacing:.35em}.lifeline{color:#FF6A1A;font-size:22px;font-weight:600;letter-spacing:3px}.sunshine{display:flex;justify-content:center;gap:12px;color:#A0A3AD;margin-bottom:40px}.hero-copy{max-width:1000px;margin:auto}.hero-copy .lead{margin-left:auto;margin-right:auto}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:40px 0}.benefit-card{background:#111318;border:1px solid #FF6A1A;border-radius:16px;padding:18px;font-weight:600}.hero-buttons{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
 
 @media(max-width:900px){.hero,.product-hero,.revenue,.contact,.grid-two{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.navlinks{overflow:auto}.result strong{font-size:42px}form{grid-template-columns:1fr}.span2{grid-column:auto}.benefit-grid{grid-template-columns:1fr}.portal-logo{font-size:4rem}.portal-wifi{font-size:2rem}}
+.brand-portal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -5px;
+}
+
+.nav-s {
+  color: #FF6A1A;
+}
+
+.nav-ring {
+  margin: 0 2px;
+}
+
+.nav-text {
+  text-align: left;
+}
+
+.nav-wifi {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: .25em;
+}
+
+.nav-tag {
+  color: #A0A3AD;
+  font-size: 0.65rem;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
