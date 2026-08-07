@@ -24,10 +24,6 @@ body{
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 
-/* =========================
-   TOP NAVIGATION
-   ========================= */
-
 .nav{
   position:sticky;
   top:0;
@@ -71,14 +67,8 @@ button{cursor:pointer}
   line-height:1;
 }
 
-.nav-s{
-  color:var(--orange2);
-}
-
-.nav-ring{
-  margin:0 3px;
-  line-height:1;
-}
+.nav-s{color:var(--orange2)}
+.nav-ring{margin:0 3px;line-height:1}
 
 .nav-wifi{
   color:white;
@@ -125,10 +115,6 @@ button{cursor:pointer}
   box-shadow:0 0 18px rgba(255,107,26,.45);
 }
 
-/* =========================
-   BUTTONS
-   ========================= */
-
 .primary,.secondary{
   border-radius:18px;
   padding:14px 22px;
@@ -152,37 +138,12 @@ button{cursor:pointer}
 }
 
 .secondary:hover{background:#3A281D}
+.small{padding:12px 20px;min-width:210px}
+.block{width:100%;margin-top:20px}
 
-.small{
-  padding:12px 20px;
-  min-width:210px;
-}
-
-.block{
-  width:100%;
-  margin-top:20px;
-}
-
-/* =========================
-   TYPOGRAPHY
-   ========================= */
-
-h1{
-  font-size:clamp(44px,6vw,82px);
-  line-height:1;
-  margin:14px 0 24px;
-}
-
-h2{
-  font-size:clamp(32px,4vw,54px);
-  line-height:1.05;
-  margin:10px 0 22px;
-}
-
-h3{
-  font-size:26px;
-  margin:10px 0;
-}
+h1{font-size:clamp(44px,6vw,82px);line-height:1;margin:14px 0 24px}
+h2{font-size:clamp(32px,4vw,54px);line-height:1.05;margin:10px 0 22px}
+h3{font-size:26px;margin:10px 0}
 
 .lead{
   font-size:20px;
@@ -201,10 +162,6 @@ h3{
 
 .gold{color:var(--gold)}
 
-/* =========================
-   HOMEPAGE HERO
-   ========================= */
-
 .hero{
   display:grid;
   grid-template-columns:.9fr 1.1fr;
@@ -217,21 +174,9 @@ h3{
     linear-gradient(180deg,#1B2430,#202B38 45%,#111827);
 }
 
-.hero-new{
-  display:block;
-  text-align:center;
-}
-
-.hero-inner{
-  max-width:1200px;
-  margin:auto;
-}
-
-.logo-container{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
+.hero-new{display:block;text-align:center}
+.hero-inner{max-width:1200px;margin:auto}
+.logo-container{display:flex;flex-direction:column;align-items:center}
 
 .portal-logo{
   display:flex;
@@ -243,14 +188,8 @@ h3{
   line-height:1;
 }
 
-.logo-s{
-  color:var(--orange2);
-}
-
-.logo-ring{
-  margin:0 4px;
-  line-height:1;
-}
+.logo-s{color:var(--orange2)}
+.logo-ring{margin:0 4px;line-height:1}
 
 .portal-wifi{
   margin-top:-15px;
@@ -277,21 +216,15 @@ h3{
   margin-bottom:40px;
 }
 
-.hero-copy{
-  max-width:1000px;
-  margin:auto;
-}
-
-.hero-copy .lead{
-  margin-left:auto;
-  margin-right:auto;
-}
+.hero-copy{max-width:1000px;margin:auto}
+.hero-copy .lead{margin-left:auto;margin-right:auto}
 
 .benefit-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin:40px 0;
+  margin:40px auto;
+  max-width:1200px;
 }
 
 .benefit-card{
@@ -300,6 +233,7 @@ h3{
   border-radius:16px;
   padding:18px;
   font-weight:600;
+  text-align:center;
 }
 
 .hero-buttons{
@@ -309,65 +243,59 @@ h3{
   flex-wrap:wrap;
 }
 
-/* Legacy logo styles retained so older sections do not break if present */
-.logo-card{
-  max-width:520px;
-  margin:auto;
-  text-align:center;
-}
-
-.logo-card>div{
-  border:4px solid var(--orange);
-  border-radius:32px;
-  background:var(--card);
-  padding:32px;
-  box-shadow:0 0 40px rgba(255,107,26,.25);
-}
-
-.sos{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:34px;
-}
-
-.sos span{
-  font-size:76px;
-  font-weight:900;
-  color:var(--orange);
-}
-
-.sos .ring{
-  width:96px;
-  height:96px;
-  border-radius:50%;
-  background:radial-gradient(circle,var(--bg) 0 28%,white 29% 43%,var(--pink) 44%);
-  box-shadow:0 0 22px rgba(255,77,141,.45);
-}
-
-.logo-card h2{letter-spacing:.35em}
-
-/* =========================
-   SECTIONS / CARDS
-   ========================= */
-
-.section{
-  padding:80px 5vw;
-}
-
-.alt{
-  background:var(--bg2);
-}
+.section{padding:80px 5vw}
+.centre-section{text-align:center}
+.alt{background:var(--bg2)}
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,360px));
+  justify-content:center;
   gap:28px;
   margin-top:34px;
+  max-width:1280px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .three{
-  grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+  grid-template-columns:repeat(3,minmax(280px,360px));
+  justify-content:center;
+}
+
+.who-we-help{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(320px,520px));
+  justify-content:center;
+  gap:28px;
+  max-width:1200px;
+  margin:40px auto 0;
+}
+
+.help-card{
+  background:var(--card);
+  border:2px solid var(--orange);
+  border-radius:28px;
+  padding:32px;
+  cursor:pointer;
+  transition:.25s;
+  text-align:center;
+  color:white;
+  box-shadow:0 0 20px rgba(255,107,26,.16);
+}
+
+.help-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 30px rgba(255,107,26,.35);
+}
+
+.help-card h3{margin-top:0;color:var(--orange)}
+.help-card p{color:var(--muted);line-height:1.7;margin-bottom:0}
+
+.who-we-help .help-card:nth-child(5){
+  grid-column:1 / span 2;
+  max-width:520px;
+  justify-self:center;
 }
 
 .card,.package,.quote,.result,.formbox,form{
@@ -378,9 +306,7 @@ h3{
   box-shadow:0 0 20px rgba(255,107,26,.16);
 }
 
-.card:hover,.package:hover{
-  box-shadow:0 0 35px rgba(255,107,26,.35);
-}
+.card:hover,.package:hover{box-shadow:0 0 35px rgba(255,107,26,.35)}
 
 .card-top{
   display:flex;
@@ -408,35 +334,15 @@ h3{
   white-space:nowrap;
 }
 
-.static{
-  position:static;
-  display:inline-block;
-  transform:none;
-  margin-bottom:20px;
-}
-
-.card p,.card li,.package li,.quote p{
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.package{
-  position:relative;
-  padding-top:44px;
-}
-
-.price{
-  font-size:42px;
-  font-weight:900;
-}
-
-/* =========================
-   REVENUE CALCULATOR
-   ========================= */
+.static{position:static;display:inline-block;transform:none;margin-bottom:20px}
+.card p,.card li,.package li,.quote p{color:var(--muted);line-height:1.6}
+.package{position:relative;padding-top:44px;text-align:left}
+.price{font-size:42px;font-weight:900}
 
 .revenue{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:minmax(280px,560px) minmax(280px,560px);
+  justify-content:center;
   gap:42px;
   align-items:center;
 }
@@ -446,6 +352,7 @@ h3{
   color:#fff;
   font-weight:800;
   margin:12px 0;
+  text-align:left;
 }
 
 .formbox input,form input,form select,form textarea{
@@ -459,56 +366,17 @@ h3{
 }
 
 textarea{min-height:130px}
-
-.result strong{
-  display:block;
-  font-size:54px;
-  margin:10px 0 20px;
-}
-
+.result strong{display:block;font-size:54px;margin:10px 0 20px}
 .result small{color:var(--muted)}
 
-.split{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.split p{border:1px solid var(--orange);border-radius:18px;background:var(--black);padding:18px}
+.split b{display:block;color:var(--gold);font-size:28px}
 
-.split p{
-  border:1px solid var(--orange);
-  border-radius:18px;
-  background:var(--black);
-  padding:18px;
-}
-
-.split b{
-  display:block;
-  color:var(--gold);
-  font-size:28px;
-}
-
-/* =========================
-   TESTIMONIALS / CTA
-   ========================= */
-
-.quote div{
-  font-size:64px;
-  color:var(--orange);
-  font-weight:900;
-  line-height:.6;
-}
-
-.quote footer{
-  border-top:1px solid rgba(255,107,26,.45);
-  margin-top:24px;
-  padding-top:18px;
-}
-
-.quote strong{
-  display:block;
-  color:var(--gold);
-}
-
+.quote{text-align:left}
+.quote div{font-size:64px;color:var(--orange);font-weight:900;line-height:.6}
+.quote footer{border-top:1px solid rgba(255,107,26,.45);margin-top:24px;padding-top:18px}
+.quote strong{display:block;color:var(--gold)}
 .quote small{color:var(--muted)}
 
 .cta{
@@ -518,35 +386,18 @@ textarea{min-height:130px}
 }
 
 .cta p{font-size:22px}
-
-.cta button{
-  border:0;
-  border-radius:18px;
-  background:var(--card);
-  color:#fff;
-  font-weight:900;
-  padding:16px 28px;
-}
-
-/* =========================
-   PRODUCT PAGES
-   ========================= */
+.cta button{border:0;border-radius:18px;background:var(--card);color:#fff;font-weight:900;padding:16px 28px}
 
 .product-hero{
   display:grid;
-  grid-template-columns:1fr .9fr;
+  grid-template-columns:minmax(280px,620px) minmax(280px,520px);
+  justify-content:center;
   gap:48px;
   align-items:center;
   padding:80px 5vw;
 }
 
-.back{
-  border:1px solid var(--orange);
-  background:var(--card);
-  color:white;
-  border-radius:999px;
-  padding:10px 16px;
-}
+.back{border:1px solid var(--orange);background:var(--card);color:white;border-radius:999px;padding:10px 16px}
 
 .visual{
   min-height:360px;
@@ -558,24 +409,8 @@ textarea{min-height:130px}
   box-shadow:0 0 35px rgba(255,107,26,.25);
 }
 
-.visual:after{
-  content:'';
-  position:absolute;
-  inset:45% 0 0;
-  background:linear-gradient(transparent,var(--card));
-}
-
-.visual span{
-  position:absolute;
-  right:24px;
-  top:24px;
-  border:1px solid var(--orange);
-  border-radius:999px;
-  background:rgba(42,28,20,.9);
-  padding:10px 15px;
-  font-weight:900;
-}
-
+.visual:after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,var(--card))}
+.visual span{position:absolute;right:24px;top:24px;border:1px solid var(--orange);border-radius:999px;background:rgba(42,28,20,.9);padding:10px 15px;font-weight:900}
 .vip{background:linear-gradient(135deg,var(--pink),var(--orange),var(--card))}
 .revenue.visual{background:linear-gradient(135deg,var(--gold),var(--orange),var(--card))}
 .hospitality{background:linear-gradient(135deg,var(--gold),var(--hover),var(--bg))}
@@ -583,166 +418,68 @@ textarea{min-height:130px}
 
 .grid-two{
   display:grid;
-  grid-template-columns:1fr 2fr;
+  grid-template-columns:minmax(280px,420px) minmax(280px,760px);
+  justify-content:center;
   gap:28px;
 }
 
-.steps{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
-}
-
-.steps p{
-  border:1px solid var(--orange);
-  border-radius:18px;
-  background:var(--black);
-  padding:18px;
-  color:var(--muted);
-}
-
-.steps b{
-  display:grid;
-  place-items:center;
-  width:34px;
-  height:34px;
-  background:var(--orange);
-  border-radius:50%;
-  margin-bottom:12px;
-}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.steps p{border:1px solid var(--orange);border-radius:18px;background:var(--black);padding:18px;color:var(--muted)}
+.steps b{display:grid;place-items:center;width:34px;height:34px;background:var(--orange);border-radius:50%;margin-bottom:12px;color:white}
 
 .benefits{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,340px));
+  justify-content:center;
   gap:18px;
+  max-width:1200px;
+  margin:30px auto 0;
 }
 
-.benefits p{
-  border:1px solid var(--orange);
-  border-radius:18px;
-  background:var(--card);
-  padding:18px;
-  color:var(--muted);
-}
-
-/* =========================
-   CONTACT FORM
-   ========================= */
+.benefits p{border:1px solid var(--orange);border-radius:18px;background:var(--card);padding:18px;color:var(--muted);text-align:center}
 
 .contact{
   display:grid;
-  grid-template-columns:.9fr 1.1fr;
+  grid-template-columns:minmax(280px,520px) minmax(280px,680px);
+  justify-content:center;
   gap:48px;
   padding:80px 5vw;
 }
 
-form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .span2{grid-column:span 2}
+.success{border:1px solid var(--gold);background:#2A1C14;color:var(--gold);border-radius:16px;padding:16px}
 
-.success{
-  border:1px solid var(--gold);
-  background:#2A1C14;
-  color:var(--gold);
-  border-radius:16px;
-  padding:16px;
-}
-
-/* =========================
-   FOOTER
-   ========================= */
-
-.footer{
-  text-align:center;
-  background:var(--black);
-  border-top:2px solid var(--orange);
-  padding:46px 5vw;
-}
-
-.footer h2{
-  color:var(--orange);
-  letter-spacing:.2em;
-  margin:0;
-}
-
-.footer p{
-  text-transform:uppercase;
-  letter-spacing:.25em;
-  font-weight:900;
-}
-
-.footer strong{
-  display:block;
-  color:var(--gold);
-  margin:14px;
-}
-
+.footer{text-align:center;background:var(--black);border-top:2px solid var(--orange);padding:46px 5vw}
+.footer h2{color:var(--orange);letter-spacing:.2em;margin:0}
+.footer p{text-transform:uppercase;letter-spacing:.25em;font-weight:900}
+.footer strong{display:block;color:var(--gold);margin:14px}
 .footer small{color:var(--muted)}
 
-/* =========================
-   RESPONSIVE
-   ========================= */
-
 @media(max-width:1200px){
-  .nav{
-    grid-template-columns:1fr;
-    justify-items:center;
-    gap:14px;
-  }
-
-  .navlinks{
-    flex-wrap:wrap;
-    max-width:760px;
-  }
-
-  .navlinks button{
-    min-width:135px;
-  }
-
-  .small{
-    min-width:260px;
-  }
+  .nav{grid-template-columns:1fr;justify-items:center;gap:14px}
+  .navlinks{flex-wrap:wrap;max-width:760px}
+  .navlinks button{min-width:135px}
+  .small{min-width:260px}
 }
 
 @media(max-width:900px){
-  .hero,.product-hero,.revenue,.contact,.grid-two{
-    grid-template-columns:1fr;
-  }
-
-  .nav{
-    align-items:center;
-  }
-
-  .navlinks{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    width:100%;
-  }
-
-  .navlinks button{
-    width:100%;
-    min-width:0;
-  }
-
+  .hero,.product-hero,.revenue,.contact,.grid-two{grid-template-columns:1fr}
+  .nav{align-items:center}
+  .navlinks{display:grid;grid-template-columns:repeat(2,1fr);width:100%}
+  .navlinks button{width:100%;min-width:0}
   .result strong{font-size:42px}
-
   form{grid-template-columns:1fr}
-
   .span2{grid-column:auto}
-
   .benefit-grid{grid-template-columns:1fr}
-
   .portal-logo{font-size:4rem}
-
   .portal-wifi{font-size:2rem}
-
   .nav-logo{font-size:2rem}
-
   .nav-wifi{font-size:.8rem}
-
   .nav-tag{font-size:.48rem}
+  .who-we-help{grid-template-columns:1fr}
+  .who-we-help .help-card:nth-child(5){grid-column:auto;max-width:none}
+  .three{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
 }
