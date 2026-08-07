@@ -101,10 +101,39 @@ export default function App() {
 
 function Home({ setPage, users, price, share, setUsers, setPrice, setShare, revenue }) {
   return <main>
-    <section className="hero">
-      <div className="logo-card"><div className="sos"><span>S</span><span className="ring"></span><span>S</span></div><h2>WI-FI</h2></div>
-      <div><p className="badge">Premium Event & Venue Connectivity</p><h1>Fast internet where mobile networks fail.</h1><p className="lead">SOS WiFi designs, installs and operates event-grade connectivity for festivals, VIP areas, backstage compounds, campsites, venues and remote sites.</p><p className="lead">Offer WiFi as a premium perk, a paid guest service, a sponsor-funded benefit or a full revenue-share model.</p><button className="primary" onClick={() => setPage('contact')}>Request a proposal</button><button className="secondary" onClick={() => setPage('revenue')}>Try revenue calculator</button></div>
+    <section className="hero hero-new">
+      <div className="hero-inner">
+        <div className="logo-container">
+          <div className="portal-logo">
+            <span className="logo-s">S</span>
+            <span className="logo-ring">🛟</span>
+            <span className="logo-s">S</span>
+          </div>
+          <div className="portal-wifi">WI-FI</div>
+        </div>
+
+        <div className="brand-line">
+          <p className="lifeline">YOUR INTERNET LIFELINE</p>
+          <div className="sunshine"><span>☀️</span><span>Powered by Sunshine</span><span>☀️</span></div>
+        </div>
+
+        <div className="hero-copy">
+          <h1>Reliable Connectivity For Festivals, Campsites, Venues & Outdoor Events</h1>
+          <p className="lead">Whether you're running a music festival, managing a campsite, supporting food traders, operating a hospitality venue or delivering premium VIP experiences, SOS WiFi provides reliable internet where mobile networks struggle.</p>
+          <div className="benefit-grid">
+            <div className="benefit-card">✅ Keep Visitors Connected</div>
+            <div className="benefit-card">✅ Support Card Payments</div>
+            <div className="benefit-card">✅ Improve Guest Experience</div>
+            <div className="benefit-card">✅ Create Revenue Opportunities</div>
+          </div>
+          <div className="hero-buttons">
+            <button className="primary" onClick={() => setPage('contact')}>Book a Free Site Survey</button>
+            <button className="secondary" onClick={() => setPage('revenue')}>Calculate Revenue Opportunity</button>
+          </div>
+        </div>
+      </div>
     </section>
+
     <section className="section"><p className="eyebrow">What SOS WiFi offers</p><h2>Products built for organisers, venues and operators.</h2><div className="cards">{serviceList.map(id => <ServiceCard key={id} id={id} p={products[id]} setPage={setPage} />)}</div></section>
     <Pricing setPage={setPage}/>
     <Revenue users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} setPage={setPage}/>
