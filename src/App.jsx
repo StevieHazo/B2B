@@ -83,9 +83,31 @@ export default function App() {
 
   return <div className="app">
     <header className="nav">
-      <button className="brand" onClick={() => setPage('home')}>
-        <span className="brand-icon">S</span><span><strong>SOS WiFi</strong><small>Your Internet Lifeline</small></span>
-      </button>
+      <button className="brand brand-portal" onClick={() => setPage('home')}>
+
+  <div className="nav-logo">
+
+    <span className="nav-s">S</span>
+
+    <span className="nav-ring">
+      🛟
+    </span>
+
+    <span className="nav-s">S</span>
+
+  </div>
+
+  <div className="nav-text">
+    <div className="nav-wifi">
+      WI-FI
+    </div>
+
+    <div className="nav-tag">
+      YOUR INTERNET LIFELINE
+    </div>
+  </div>
+
+</button>
       <div className="navlinks">{nav.map(([id, label]) => <button key={id} onClick={() => setPage(id)} className={page === id ? 'active' : ''}>{label}</button>)}</div>
       <button className="primary small" onClick={() => setPage('contact')}>Request a site survey</button>
     </header>
