@@ -255,25 +255,67 @@ function Package({ name, badge, price, items, setPage }) {
 function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, setPage }) {
   return (
     <section className="section revenue">
-      <div>
+      {/* LEFT BOX */}
+      <div className="revenue-box">
         <p className="eyebrow gold">Revenue share calculator</p>
         <h2>Show organisers how WiFi can pay its way.</h2>
-        <p className="lead">Use this model to demonstrate how paid access could generate income for a festival, campsite, event organiser or venue partner.</p>
+        <p className="lead" style={{ marginBottom: 8 }}>
+          Use this model to demonstrate how paid access could generate income for a festival, campsite, event organiser or venue partner.
+        </p>
+
         <div className="formbox">
-          <label>Expected paying users<input type="number" value={users} onChange={e => setUsers(e.target.value)} /></label>
-          <label>Average session price<input type="number" value={price} onChange={e => setPrice(e.target.value)} /></label>
-          <label>Venue revenue share percentage<input type="number" value={share} onChange={e => setShare(e.target.value)} /></label>
+          <label>
+            Expected paying users
+            <input
+              type="number"
+              value={users}
+              onChange={e => setUsers(e.target.value)}
+            />
+          </label>
+          <label>
+            Average session price (£)
+            <input
+              type="number"
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+            />
+          </label>
+          <label>
+            Venue revenue share (%)
+            <input
+              type="number"
+              value={share}
+              onChange={e => setShare(e.target.value)}
+            />
+          </label>
         </div>
       </div>
-      <div className="result">
-        <span className="floating static">Example event return</span>
-        <small>Total gross revenue</small>
-        <strong>{money(revenue.gross)}</strong>
-        <div className="split">
-          <p><small>Venue share</small><b>{money(revenue.venue)}</b></p>
-          <p><small>SOS WiFi share</small><b>{money(revenue.sos)}</b></p>
+
+      {/* RIGHT BOX */}
+      <div className="result revenue-box">
+        <div>
+          <span className="floating static">Example event return</span>
+          <small>Total gross revenue</small>
+          <strong>{money(revenue.gross)}</strong>
+
+          <div className="split">
+            <p>
+              <small>Venue share</small>
+              <b>{money(revenue.venue)}</b>
+            </p>
+            <p>
+              <small>SOS WiFi share</small>
+              <b>{money(revenue.sos)}</b>
+            </p>
+          </div>
         </div>
-        <button className="primary block" onClick={() => setPage('contact')}>Build this into my proposal</button>
+
+        <button
+          className="primary block"
+          onClick={() => setPage('contact')}
+        >
+          Build this into my proposal
+        </button>
       </div>
     </section>
   );
