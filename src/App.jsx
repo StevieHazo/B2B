@@ -82,39 +82,38 @@ const testimonials = [
 ];
 
 const helpCards = [
-  {
-    title: '🎪 Festivals',
-    page: 'festival',
-    text: 'Reliable connectivity for music festivals, food festivals, agricultural shows and large outdoor events.'
-  },
-  {
-    title: '🏕️ Campsites',
-    page: 'hospitality',
-    text: 'Seasonal and permanent connectivity for campsites, glamping locations and holiday parks.'
-  },
-  {
-    title: '⭐ VIP & Hospitality',
-    page: 'vip',
-    text: 'Premium internet access for VIP areas, artist compounds, hospitality zones and sponsors.'
-  },
-  {
-    title: '💳 Food Traders',
-    page: 'revenue',
-    text: 'Connectivity that keeps card payments, EPOS systems and traders connected throughout the event.'
-  },
-  {
-    title: '🌳 Outdoor Venues',
-    page: 'temporary',
-    text: 'Temporary and permanent connectivity for outdoor attractions, venues and remote locations.'
-  }
+  { title: '🎪 Festivals', page: 'festival', text: 'Reliable connectivity for music festivals, food festivals, agricultural shows and large outdoor events.' },
+  { title: '🏕️ Campsites', page: 'hospitality', text: 'Seasonal and permanent connectivity for campsites, glamping locations and holiday parks.' },
+  { title: '⭐ VIP & Hospitality', page: 'vip', text: 'Premium internet access for VIP areas, artist compounds, hospitality zones and sponsors.' },
+  { title: '💳 Food Traders', page: 'revenue', text: 'Connectivity that keeps card payments, EPOS systems and traders connected throughout the event.' },
+  { title: '🌳 Outdoor Venues', page: 'temporary', text: 'Temporary and permanent connectivity for outdoor attractions, venues and remote locations.' }
 ];
 
 function money(value) {
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-    maximumFractionDigits: 0
-  }).format(value || 0);
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value || 0);
+}
+
+function SOSLogo({ variant = 'hero', showStrapline = true, showPowered = true }) {
+  return (
+    <div className={`sos-logo sos-logo-${variant}`}>
+      <div className="sos-logo-container">
+        <div className="sos-mark">
+          <span className="sos-letter">S</span>
+          <span className="sos-lifebuoy">🛟</span>
+          <span className="sos-letter">S</span>
+        </div>
+        <div className="sos-wifi">WI-FI</div>
+      </div>
+      {showStrapline && <p className="sos-lifeline">YOUR INTERNET LIFELINE</p>}
+      {showPowered && (
+        <div className="sos-powered">
+          <span>☀️</span>
+          <span>Powered by Sunshine</span>
+          <span>☀️</span>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function App() {
@@ -143,25 +142,13 @@ export default function App() {
   return (
     <div className="app">
       <header className="nav">
-        <button className="brand" onClick={() => setPage('home')}>
-          <div className="nav-logo-wrapper">
-            <div className="nav-logo">
-              <span className="nav-s">S</span>
-              <span className="nav-ring">🛟</span>
-              <span className="nav-s">S</span>
-            </div>
-            <div className="nav-wifi">WI-FI</div>
-            <div className="nav-tag">YOUR INTERNET LIFELINE</div>
-          </div>
+        <button className="brand" onClick={() => setPage('home')} aria-label="SOS WiFi home">
+          <SOSLogo variant="nav" showStrapline={true} showPowered={false} />
         </button>
 
         <div className="navlinks">
           {nav.map(([id, label]) => (
-            <button
-              key={id}
-              onClick={() => setPage(id)}
-              className={page === id ? 'active' : ''}
-            >
+            <button key={id} onClick={() => setPage(id)} className={page === id ? 'active' : ''}>
               {label}
             </button>
           ))}
@@ -173,41 +160,16 @@ export default function App() {
       </header>
 
       {page === 'home' && (
-        <Home
-          setPage={setPage}
-          users={users}
-          price={price}
-          share={share}
-          setUsers={setUsers}
-          setPrice={setPrice}
-          setShare={setShare}
-          revenue={revenue}
-        />
+        <Home setPage={setPage} users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} />
       )}
-
-      {serviceList.includes(page) && (
-        <Product product={products[page]} setPage={setPage} />
-      )}
-
+      {serviceList.includes(page) && <Product product={products[page]} setPage={setPage} />}
       {page === 'revenue' && (
-        <Revenue
-          users={users}
-          price={price}
-          share={share}
-          setUsers={setUsers}
-          setPrice={setPrice}
-          setShare={setShare}
-          revenue={revenue}
-          setPage={setPage}
-        />
+        <Revenue users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} setPage={setPage} />
       )}
-
       {page === 'contact' && <Contact sent={sent} setSent={setSent} />}
 
       <footer className="footer">
-        <h2>SOS WiFi</h2>
-        <p>YOUR INTERNET LIFELINE</p>
-        <strong>☀️ Powered by Sunshine ☀️</strong>
+        <SOSLogo variant="footer" showStrapline={true} showPowered={true} />
         <small>Festivals • Venues • Campsites • Remote locations • Premium connectivity</small>
       </footer>
     </div>
@@ -219,30 +181,11 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
     <main>
       <section className="hero hero-new">
         <div className="hero-inner">
-          <div className="logo-container">
-            <div className="portal-logo">
-              <span className="logo-s">S</span>
-              <span className="logo-ring">🛟</span>
-              <span className="logo-s">S</span>
-            </div>
-            <div className="portal-wifi">WI-FI</div>
-          </div>
-
-          <div className="brand-line">
-            <p className="lifeline">YOUR INTERNET LIFELINE</p>
-            <div className="sunshine">
-              <span>☀️</span>
-              <span>Powered by Sunshine</span>
-              <span>☀️</span>
-            </div>
-          </div>
-
+          <SOSLogo variant="hero" showStrapline={true} showPowered={true} />
           <div className="hero-copy">
             <h1>Reliable Connectivity For Festivals, Campsites, Venues & Outdoor Events</h1>
             <p className="lead">
-              Whether you're running a music festival, managing a campsite, supporting food traders,
-              operating a hospitality venue or delivering premium VIP experiences, SOS WiFi provides
-              reliable internet where mobile networks struggle.
+              Whether you're running a music festival, managing a campsite, supporting food traders, operating a hospitality venue or delivering premium VIP experiences, SOS WiFi provides reliable internet where mobile networks struggle.
             </p>
             <div className="benefit-grid">
               <div className="benefit-card">✅ Keep Visitors Connected</div>
@@ -251,12 +194,8 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
               <div className="benefit-card">✅ Create Revenue Opportunities</div>
             </div>
             <div className="hero-buttons">
-              <button className="primary" onClick={() => setPage('contact')}>
-                Book a Free Site Survey
-              </button>
-              <button className="secondary" onClick={() => setPage('revenue')}>
-                Calculate Revenue Opportunity
-              </button>
+              <button className="primary" onClick={() => setPage('contact')}>Book a Free Site Survey</button>
+              <button className="secondary" onClick={() => setPage('revenue')}>Calculate Revenue Opportunity</button>
             </div>
           </div>
         </div>
@@ -267,11 +206,7 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
         <h2>Connectivity solutions designed around your event, venue and visitors.</h2>
         <div className="who-we-help">
           {helpCards.map(card => (
-            <button
-              key={card.title}
-              className="help-card"
-              onClick={() => setPage(card.page)}
-            >
+            <button key={card.title} className="help-card" onClick={() => setPage(card.page)}>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
             </button>
@@ -280,16 +215,7 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
       </section>
 
       <Pricing setPage={setPage} />
-      <Revenue
-        users={users}
-        price={price}
-        share={share}
-        setUsers={setUsers}
-        setPrice={setPrice}
-        setShare={setShare}
-        revenue={revenue}
-        setPage={setPage}
-      />
+      <Revenue users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} setPage={setPage} />
       <Testimonials />
       <CTA setPage={setPage} />
     </main>
@@ -308,16 +234,7 @@ function Pricing({ setPage }) {
       <p className="eyebrow gold">Commercial packages</p>
       <h2>Built for £10k to £50k event contracts.</h2>
       <div className="cards three">
-        {pkgs.map(([name, badge, price, items]) => (
-          <Package
-            key={name}
-            name={name}
-            badge={badge}
-            price={price}
-            items={items}
-            setPage={setPage}
-          />
-        ))}
+        {pkgs.map(([name, badge, price, items]) => <Package key={name} name={name} badge={badge} price={price} items={items} setPage={setPage} />)}
       </div>
     </section>
   );
@@ -329,14 +246,8 @@ function Package({ name, badge, price, items, setPage }) {
       <span className="floating">{badge}</span>
       <h3>{name}</h3>
       <div className="price">{price}</div>
-      <ul>
-        {items.map(x => (
-          <li key={x}>✓ {x}</li>
-        ))}
-      </ul>
-      <button className="primary block" onClick={() => setPage('contact')}>
-        Discuss this package
-      </button>
+      <ul>{items.map(x => <li key={x}>✓ {x}</li>)}</ul>
+      <button className="primary block" onClick={() => setPage('contact')}>Discuss this package</button>
     </article>
   );
 }
@@ -347,43 +258,22 @@ function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, s
       <div>
         <p className="eyebrow gold">Revenue share calculator</p>
         <h2>Show organisers how WiFi can pay its way.</h2>
-        <p className="lead">
-          Use this model to demonstrate how paid access could generate income for a festival,
-          campsite, event organiser or venue partner.
-        </p>
+        <p className="lead">Use this model to demonstrate how paid access could generate income for a festival, campsite, event organiser or venue partner.</p>
         <div className="formbox">
-          <label>
-            Expected paying users
-            <input type="number" value={users} onChange={e => setUsers(e.target.value)} />
-          </label>
-          <label>
-            Average session price
-            <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
-          </label>
-          <label>
-            Venue revenue share percentage
-            <input type="number" value={share} onChange={e => setShare(e.target.value)} />
-          </label>
+          <label>Expected paying users<input type="number" value={users} onChange={e => setUsers(e.target.value)} /></label>
+          <label>Average session price<input type="number" value={price} onChange={e => setPrice(e.target.value)} /></label>
+          <label>Venue revenue share percentage<input type="number" value={share} onChange={e => setShare(e.target.value)} /></label>
         </div>
       </div>
-
       <div className="result">
         <span className="floating static">Example event return</span>
         <small>Total gross revenue</small>
         <strong>{money(revenue.gross)}</strong>
         <div className="split">
-          <p>
-            <small>Venue share</small>
-            <b>{money(revenue.venue)}</b>
-          </p>
-          <p>
-            <small>SOS WiFi share</small>
-            <b>{money(revenue.sos)}</b>
-          </p>
+          <p><small>Venue share</small><b>{money(revenue.venue)}</b></p>
+          <p><small>SOS WiFi share</small><b>{money(revenue.sos)}</b></p>
         </div>
-        <button className="primary block" onClick={() => setPage('contact')}>
-          Build this into my proposal
-        </button>
+        <button className="primary block" onClick={() => setPage('contact')}>Build this into my proposal</button>
       </div>
     </section>
   );
@@ -399,10 +289,7 @@ function Testimonials() {
           <blockquote className="quote" key={name}>
             <div>“</div>
             <p>{quote}</p>
-            <footer>
-              <strong>{name}</strong>
-              <small>{detail}</small>
-            </footer>
+            <footer><strong>{name}</strong><small>{detail}</small></footer>
           </blockquote>
         ))}
       </div>
@@ -432,55 +319,16 @@ function Product({ product, setPage }) {
           <button className="primary" onClick={() => setPage('contact')}>Request a proposal</button>
           <button className="secondary" onClick={() => setPage('revenue')}>View commercial model</button>
         </div>
-        <div className={'visual ' + product.visual}>
-          <span>Festival-ready network</span>
-        </div>
+        <div className={'visual ' + product.visual}><span>Festival-ready network</span></div>
       </section>
 
       <section className="section alt grid-two">
-        <div className="card">
-          <h2>Who it is for</h2>
-          <ul>
-            {product.ideal.map(x => (
-              <li key={x}>✓ {x}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="card wide">
-          <h2>How it works</h2>
-          <div className="steps">
-            {product.steps.map((x, i) => (
-              <p key={x}><b>{i + 1}</b>{x}</p>
-            ))}
-          </div>
-        </div>
+        <div className="card"><h2>Who it is for</h2><ul>{product.ideal.map(x => <li key={x}>✓ {x}</li>)}</ul></div>
+        <div className="card wide"><h2>How it works</h2><div className="steps">{product.steps.map((x, i) => <p key={x}><b>{i + 1}</b>{x}</p>)}</div></div>
       </section>
 
-      <section className="section centre-section">
-        <h2>Benefits</h2>
-        <div className="benefits">
-          {product.benefits.map(x => (
-            <p key={x}>✓ {x}</p>
-          ))}
-        </div>
-      </section>
-
-      <section className="section alt centre-section">
-        <h2>Example packages</h2>
-        <div className="cards three">
-          {product.packages.map(([name, badge, price, text]) => (
-            <Package
-              key={name}
-              name={name}
-              badge={badge}
-              price={price}
-              items={[text]}
-              setPage={setPage}
-            />
-          ))}
-        </div>
-      </section>
-
+      <section className="section centre-section"><h2>Benefits</h2><div className="benefits">{product.benefits.map(x => <p key={x}>✓ {x}</p>)}</div></section>
+      <section className="section alt centre-section"><h2>Example packages</h2><div className="cards three">{product.packages.map(([name, badge, price, text]) => <Package key={name} name={name} badge={badge} price={price} items={[text]} setPage={setPage} />)}</div></section>
       <CTA setPage={setPage} />
     </main>
   );
@@ -494,42 +342,18 @@ function Contact({ sent, setSent }) {
           <p className="eyebrow">Enquiry</p>
           <h1>Request a proposal or site survey.</h1>
           <p className="lead">Use this form to capture the key details needed for a serious event connectivity proposal.</p>
-          <div className="card">
-            <h2>Good proposal inputs</h2>
-            <ul>
-              <li>✓ Site location and event dates</li>
-              <li>✓ Expected visitor numbers</li>
-              <li>✓ VIP, crew, trader and public areas</li>
-              <li>✓ Paid, sponsored or included access model</li>
-              <li>✓ Known signal problems on site</li>
-            </ul>
-          </div>
+          <div className="card"><h2>Good proposal inputs</h2><ul><li>✓ Site location and event dates</li><li>✓ Expected visitor numbers</li><li>✓ VIP, crew, trader and public areas</li><li>✓ Paid, sponsored or included access model</li><li>✓ Known signal problems on site</li></ul></div>
         </div>
-
         <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
           <Field label="Name" />
           <Field label="Organisation" />
           <Field label="Email" type="email" />
           <Field label="Phone" />
-          <label>
-            Event type
-            <select>
-              <option>Festival</option>
-              <option>Outdoor event</option>
-              <option>Bar, café or hospitality venue</option>
-              <option>Campsite or holiday park</option>
-              <option>Temporary site</option>
-            </select>
-          </label>
+          <label>Event type<select><option>Festival</option><option>Outdoor event</option><option>Bar, café or hospitality venue</option><option>Campsite or holiday park</option><option>Temporary site</option></select></label>
           <Field label="Estimated attendance" />
-          <label className="span2">
-            What do you need connected?
-            <textarea placeholder="Tell us about VIP areas, backstage, crew, traders, public WiFi, campsites or remote buildings." />
-          </label>
+          <label className="span2">What do you need connected?<textarea placeholder="Tell us about VIP areas, backstage, crew, traders, public WiFi, campsites or remote buildings." /></label>
           <button className="primary span2">Send enquiry</button>
-          {sent && (
-            <p className="success span2">Thanks. Your enquiry details have been captured in this prototype.</p>
-          )}
+          {sent && <p className="success span2">Thanks. Your enquiry details have been captured in this prototype.</p>}
         </form>
       </section>
     </main>
@@ -537,10 +361,5 @@ function Contact({ sent, setSent }) {
 }
 
 function Field({ label, type = 'text' }) {
-  return (
-    <label>
-      {label}
-      <input type={type} />
-    </label>
-  );
+  return <label>{label}<input type={type} /></label>;
 }
