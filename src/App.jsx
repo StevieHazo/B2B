@@ -81,6 +81,34 @@ const testimonials = [
   ['Venue Owner', 'Rural leisure site', 'The paid access model meant we could offer better service without taking on the technical work ourselves.']
 ];
 
+const helpCards = [
+  {
+    title: '🎪 Festivals',
+    page: 'festival',
+    text: 'Reliable connectivity for music festivals, food festivals, agricultural shows and large outdoor events.'
+  },
+  {
+    title: '🏕️ Campsites',
+    page: 'hospitality',
+    text: 'Seasonal and permanent connectivity for campsites, glamping locations and holiday parks.'
+  },
+  {
+    title: '⭐ VIP & Hospitality',
+    page: 'vip',
+    text: 'Premium internet access for VIP areas, artist compounds, hospitality zones and sponsors.'
+  },
+  {
+    title: '💳 Food Traders',
+    page: 'revenue',
+    text: 'Connectivity that keeps card payments, EPOS systems and traders connected throughout the event.'
+  },
+  {
+    title: '🌳 Outdoor Venues',
+    page: 'temporary',
+    text: 'Temporary and permanent connectivity for outdoor attractions, venues and remote locations.'
+  }
+];
+
 function money(value) {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -234,12 +262,19 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
         </div>
       </section>
 
-      <section className="section">
-        <p className="eyebrow">What SOS WiFi offers</p>
-        <h2>Products built for organisers, venues and operators.</h2>
-        <div className="cards">
-          {serviceList.map(id => (
-            <ServiceCard key={id} id={id} p={products[id]} setPage={setPage} />
+      <section className="section centre-section">
+        <p className="eyebrow">Who We Help</p>
+        <h2>Connectivity solutions designed around your event, venue and visitors.</h2>
+        <div className="who-we-help">
+          {helpCards.map(card => (
+            <button
+              key={card.title}
+              className="help-card"
+              onClick={() => setPage(card.page)}
+            >
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </button>
           ))}
         </div>
       </section>
@@ -261,27 +296,6 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
   );
 }
 
-function ServiceCard({ id, p, setPage }) {
-  return (
-    <article className="card">
-      <div className="card-top">
-        <span className="chip">{p.kicker}</span>
-        <strong>{p.packages[0][2]}</strong>
-      </div>
-      <h3>{p.title}</h3>
-      <p>{p.summary}</p>
-      <ul>
-        {p.benefits.slice(0, 3).map(x => (
-          <li key={x}>✓ {x}</li>
-        ))}
-      </ul>
-      <button className="secondary block" onClick={() => setPage(id)}>
-        Explore service
-      </button>
-    </article>
-  );
-}
-
 function Pricing({ setPage }) {
   const pkgs = [
     ['Essential Event Network', 'STARTER', '£10k to £18k', ['Core event WiFi zones', 'Trader and organiser connectivity', 'Captive portal and basic support']],
@@ -290,7 +304,7 @@ function Pricing({ setPage }) {
   ];
 
   return (
-    <section className="section alt">
+    <section className="section alt centre-section">
       <p className="eyebrow gold">Commercial packages</p>
       <h2>Built for £10k to £50k event contracts.</h2>
       <div className="cards three">
@@ -377,7 +391,7 @@ function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, s
 
 function Testimonials() {
   return (
-    <section className="section">
+    <section className="section centre-section">
       <p className="eyebrow">Customer confidence</p>
       <h2>Designed for the real conditions of live events.</h2>
       <div className="cards three">
@@ -442,7 +456,7 @@ function Product({ product, setPage }) {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section centre-section">
         <h2>Benefits</h2>
         <div className="benefits">
           {product.benefits.map(x => (
@@ -451,7 +465,7 @@ function Product({ product, setPage }) {
         </div>
       </section>
 
-      <section className="section alt">
+      <section className="section alt centre-section">
         <h2>Example packages</h2>
         <div className="cards three">
           {product.packages.map(([name, badge, price, text]) => (
