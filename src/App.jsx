@@ -5,7 +5,7 @@ const products = {
     title: 'Festival & Event WiFi',
     kicker: 'Event infrastructure',
     visual: 'festival',
-    summary: 'Managed event connectivity for festivals, outdoor venues and high-footfall temporary sites where mobile networks become congested.',
+    summary: 'Managed high-capacity connectivity for festivals, outdoor venues and high-footfall temporary sites where mobile networks become congested.',
     ideal: ['Music festivals', 'Food festivals', 'Agricultural shows', 'Sporting events', 'Christmas markets', 'Trader villages'],
     steps: ['Plan the site around priority zones, visitor numbers and power availability.', 'Install backhaul, access points and the branded SOS WiFi captive portal.', 'Monitor the service and support the organiser during the event.'],
     benefits: ['Better visitor experience when mobile signal is poor', 'Keeps organisers, traders and production teams connected', 'Supports card payments and operational messaging', 'Can be funded by organisers, users or sponsors', 'Scales by zone, footfall and event size', 'Creates a professional event infrastructure offer'],
@@ -16,13 +16,13 @@ const products = {
     ]
   },
   vip: {
-    title: 'VIP & Backstage Connectivity',
+    title: 'VIP, Artists & Crew Connectivity',
     kicker: 'Premium experience',
     visual: 'vip',
-    summary: 'Dedicated premium internet for VIP lounges, artist compounds, media zones, sponsor areas and production offices.',
+    summary: 'Dedicated high-speed, always-on internet for VIP lounges, artist compounds, media zones, sponsor areas and production offices — giving your event a clear competitive edge.',
     ideal: ['VIP guest areas', 'Backstage compounds', 'Artist hospitality', 'Sponsor lounges', 'Crew welfare', 'Production offices'],
     steps: ['Create private networks for priority event areas.', 'Control access by wristband, voucher, password or captive portal.', 'Prioritise bandwidth for premium users and operational teams.'],
-    benefits: ['Improves the premium ticket experience', 'Supports artist, crew and sponsor expectations', 'Keeps operational teams connected', 'Creates a visible VIP value-add', 'Can be bundled into hospitality sales', 'Reduces pressure on public networks'],
+    benefits: ['Elevates the artist and VIP experience', 'Supports crew and production expectations', 'Keeps operational teams fully connected', 'Creates a visible premium value-add', 'Can be bundled into hospitality packages', 'Reduces pressure on public networks'],
     packages: [
       ['VIP Lounge', 'VIP', 'From £12k', 'For one or more hospitality areas with managed access.'],
       ['Backstage Plus', 'CREW', '£18k to £30k', 'Dedicated backstage, crew, artist and production connectivity.'],
@@ -76,24 +76,24 @@ const products = {
 const serviceList = Object.keys(products);
 
 const testimonials = [
-  ['Festival Operations Manager', 'Independent outdoor event', 'SOS WiFi helped us offer reliable connectivity in an area where mobile signal usually collapses once the site fills up.'],
-  ['Hospitality Lead', 'Weekend music festival', 'The VIP WiFi gave our hospitality area a proper premium feel. Guests could stay connected without fighting the public network.'],
-  ['Venue Owner', 'Rural leisure site', 'The paid access model meant we could offer better service without taking on the technical work ourselves.']
+  ['Festival Operations Manager', 'Independent outdoor event', 'SOS WiFi delivered reliable high-speed connectivity for our artists, crew and production teams in an area where mobile networks usually collapse.'],
+  ['Hospitality Lead', 'Weekend music festival', 'The dedicated VIP and backstage network gave our hospitality areas a genuine premium feel and kept everyone connected without relying on the public network.'],
+  ['Venue Owner', 'Rural leisure site', 'The paid-access model allowed us to offer a professional service without taking on the technical management ourselves.']
 ];
 
 const helpCards = [
-  { title: '🎪 Festivals', page: 'festival', text: 'Reliable connectivity for music festivals, food festivals, agricultural shows and large outdoor events.' },
-  { title: '🏕️ Campsites', page: 'hospitality', text: 'Seasonal and permanent connectivity for campsites, glamping locations and holiday parks.' },
-  { title: '⭐ VIP & Hospitality', page: 'vip', text: 'Premium internet access for VIP areas, artist compounds, hospitality zones and sponsors.' },
-  { title: '💳 Food Traders', page: 'revenue', text: 'Connectivity that keeps card payments, EPOS systems and traders connected throughout the event.' },
-  { title: '🌳 Outdoor Venues', page: 'temporary', text: 'Temporary and permanent connectivity for outdoor attractions, venues and remote locations.' }
+  { title: 'Festivals & Outdoor Events', page: 'festival', text: 'High-capacity networks engineered for music festivals, food festivals, shows and large temporary sites.' },
+  { title: 'Campsites & Holiday Parks', page: 'hospitality', text: 'Managed seasonal and permanent guest WiFi for campsites, glamping sites and leisure parks.' },
+  { title: 'VIP, Artists & Crew', page: 'vip', text: 'Dedicated high-speed, always-on connectivity for VIP lounges, artist compounds, backstage and production teams.' },
+  { title: 'Traders & Operations', page: 'revenue', text: 'Dependable connectivity that keeps card payments, EPOS systems and operational teams online throughout the event.' },
+  { title: 'Temporary & Remote Sites', page: 'temporary', text: 'Rapid-deployment internet solutions for pop-ups, compounds, film sets and outdoor venues.' }
 ];
 
 function money(value) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value || 0);
 }
 
-function SOSLogo({ variant = 'hero', showStrapline = true, showPowered = true }) {
+function SOSLogo({ variant = 'hero', showStrapline = true }) {
   return (
     <div className={`sos-logo sos-logo-${variant}`}>
       <div className="sos-logo-container">
@@ -104,14 +104,7 @@ function SOSLogo({ variant = 'hero', showStrapline = true, showPowered = true })
         </div>
         <div className="sos-wifi">WI-FI</div>
       </div>
-      {showStrapline && <p className="sos-lifeline">YOUR INTERNET LIFELINE</p>}
-      {showPowered && (
-        <div className="sos-powered">
-          <span>☀️</span>
-          <span>Powered by Sunshine</span>
-          <span>☀️</span>
-        </div>
-      )}
+      {showStrapline && <p className="sos-lifeline">Event Connectivity Partners</p>}
     </div>
   );
 }
@@ -132,7 +125,7 @@ export default function App() {
   const nav = [
     ['home', 'Home'],
     ['festival', 'Festivals'],
-    ['vip', 'VIP'],
+    ['vip', 'VIP & Crew'],
     ['revenue', 'Revenue'],
     ['hospitality', 'Hospitality'],
     ['temporary', 'Temporary'],
@@ -143,7 +136,7 @@ export default function App() {
     <div className="app">
       <header className="nav">
         <button className="brand" onClick={() => setPage('home')} aria-label="SOS WiFi home">
-          <SOSLogo variant="nav" showStrapline={true} showPowered={false} />
+          <SOSLogo variant="nav" showStrapline={true} />
         </button>
 
         <div className="navlinks">
@@ -155,7 +148,7 @@ export default function App() {
         </div>
 
         <button className="primary small" onClick={() => setPage('contact')}>
-          Request a site survey
+          Request a Site Survey
         </button>
       </header>
 
@@ -169,8 +162,8 @@ export default function App() {
       {page === 'contact' && <Contact sent={sent} setSent={setSent} />}
 
       <footer className="footer">
-        <SOSLogo variant="footer" showStrapline={true} showPowered={true} />
-        <small>Festivals • Venues • Campsites • Remote locations • Premium connectivity</small>
+        <SOSLogo variant="footer" showStrapline={true} />
+        <small>Festivals • Venues • Campsites • Remote locations • Professional event connectivity</small>
       </footer>
     </div>
   );
@@ -181,29 +174,29 @@ function Home({ setPage, users, price, share, setUsers, setPrice, setShare, reve
     <main>
       <section className="hero hero-new">
         <div className="hero-inner">
-          <SOSLogo variant="hero" showStrapline={true} showPowered={true} />
+          <SOSLogo variant="hero" showStrapline={true} />
           <div className="hero-copy">
-            <h1>Reliable Connectivity For Festivals, Campsites, Venues & Outdoor Events</h1>
+            <h1>Professional Connectivity for Festivals, Venues & Outdoor Events</h1>
             <p className="lead">
-              Whether you're running a music festival, managing a campsite, supporting food traders, operating a hospitality venue or delivering premium VIP experiences, SOS WiFi provides reliable internet where mobile networks struggle.
+              SOS WiFi designs, deploys and manages high-capacity internet infrastructure for festivals, campsites and outdoor venues. We specialise in always-on, high-speed connectivity for artists, crew, production teams and VIP areas — giving organisers a clear competitive edge in guest and client experience.
             </p>
             <div className="benefit-grid">
-              <div className="benefit-card">✅ Keep Visitors Connected</div>
-              <div className="benefit-card">✅ Support Card Payments</div>
-              <div className="benefit-card">✅ Improve Guest Experience</div>
-              <div className="benefit-card">✅ Create Revenue Opportunities</div>
+              <div className="benefit-card">Always-on for Crew & Bands</div>
+              <div className="benefit-card">Reliable Operations & Payments</div>
+              <div className="benefit-card">Elevated VIP Experience</div>
+              <div className="benefit-card">Revenue-Generating Access</div>
             </div>
             <div className="hero-buttons">
-              <button className="primary" onClick={() => setPage('contact')}>Book a Free Site Survey</button>
-              <button className="secondary" onClick={() => setPage('revenue')}>Calculate Revenue Opportunity</button>
+              <button className="primary" onClick={() => setPage('contact')}>Request a Site Survey</button>
+              <button className="secondary" onClick={() => setPage('revenue')}>Explore Commercial Models</button>
             </div>
           </div>
         </div>
       </section>
 
       <section className="section centre-section">
-        <p className="eyebrow">Who We Help</p>
-        <h2>Connectivity solutions designed around your event, venue and visitors.</h2>
+        <p className="eyebrow">Who We Work With</p>
+        <h2>Connectivity solutions designed for event organisers and venue operators</h2>
         <div className="who-we-help">
           {helpCards.map(card => (
             <button key={card.title} className="help-card" onClick={() => setPage(card.page)}>
@@ -231,8 +224,8 @@ function Pricing({ setPage }) {
 
   return (
     <section className="section alt centre-section">
-      <p className="eyebrow gold">Commercial packages</p>
-      <h2>Built for £10k to £50k event contracts.</h2>
+      <p className="eyebrow gold">Commercial Packages</p>
+      <h2>Flexible solutions from £10k to £50k+ event contracts</h2>
       <div className="cards three">
         {pkgs.map(([name, badge, price, items]) => <Package key={name} name={name} badge={badge} price={price} items={items} setPage={setPage} />)}
       </div>
@@ -255,43 +248,29 @@ function Package({ name, badge, price, items, setPage }) {
 function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, setPage }) {
   return (
     <section className="section revenue">
-      {/* LEFT BOX */}
       <div className="revenue-box">
-        <p className="eyebrow gold">Revenue share calculator</p>
-        <h2>Show organisers how WiFi can pay its way.</h2>
+        <p className="eyebrow gold">Commercial Model</p>
+        <h2>Turn connectivity into a revenue opportunity</h2>
         <p className="lead" style={{ marginBottom: 8 }}>
-          Use this model to demonstrate how paid access could generate income for a festival, campsite, event organiser or venue partner.
+          Model how a professionally managed paid-access WiFi service can generate additional income for your festival or venue under a transparent revenue-share arrangement.
         </p>
 
         <div className="formbox">
           <label>
             Expected paying users
-            <input
-              type="number"
-              value={users}
-              onChange={e => setUsers(e.target.value)}
-            />
+            <input type="number" value={users} onChange={e => setUsers(e.target.value)} />
           </label>
           <label>
             Average session price (£)
-            <input
-              type="number"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
-            />
+            <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
           </label>
           <label>
             Venue revenue share (%)
-            <input
-              type="number"
-              value={share}
-              onChange={e => setShare(e.target.value)}
-            />
+            <input type="number" value={share} onChange={e => setShare(e.target.value)} />
           </label>
         </div>
       </div>
 
-      {/* RIGHT BOX */}
       <div className="result revenue-box">
         <div>
           <span className="floating static">Example event return</span>
@@ -310,10 +289,7 @@ function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, s
           </div>
         </div>
 
-        <button
-          className="primary block"
-          onClick={() => setPage('contact')}
-        >
+        <button className="primary block" onClick={() => setPage('contact')}>
           Build this into my proposal
         </button>
       </div>
@@ -324,8 +300,8 @@ function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, s
 function Testimonials() {
   return (
     <section className="section centre-section">
-      <p className="eyebrow">Customer confidence</p>
-      <h2>Designed for the real conditions of live events.</h2>
+      <p className="eyebrow">Client Feedback</p>
+      <h2>Designed for the real demands of live events</h2>
       <div className="cards three">
         {testimonials.map(([name, detail, quote]) => (
           <blockquote className="quote" key={name}>
@@ -342,8 +318,8 @@ function Testimonials() {
 function CTA({ setPage }) {
   return (
     <section className="cta">
-      <h2>Ready to make connectivity part of the event experience?</h2>
-      <p>Tell us about your site, expected attendance and the areas you need to connect.</p>
+      <h2>Ready to strengthen connectivity at your next event?</h2>
+      <p>Tell us about your site, expected attendance and the areas you need to connect — including VIP, artists and crew.</p>
       <button onClick={() => setPage('contact')}>Start an enquiry</button>
     </section>
   );
@@ -361,7 +337,7 @@ function Product({ product, setPage }) {
           <button className="primary" onClick={() => setPage('contact')}>Request a proposal</button>
           <button className="secondary" onClick={() => setPage('revenue')}>View commercial model</button>
         </div>
-        <div className={'visual ' + product.visual}><span>Festival-ready network</span></div>
+        <div className={'visual ' + product.visual}><span>Professional event network</span></div>
       </section>
 
       <section className="section alt grid-two">
@@ -382,20 +358,40 @@ function Contact({ sent, setSent }) {
       <section className="contact">
         <div>
           <p className="eyebrow">Enquiry</p>
-          <h1>Request a proposal or site survey.</h1>
-          <p className="lead">Use this form to capture the key details needed for a serious event connectivity proposal.</p>
-          <div className="card"><h2>Good proposal inputs</h2><ul><li>✓ Site location and event dates</li><li>✓ Expected visitor numbers</li><li>✓ VIP, crew, trader and public areas</li><li>✓ Paid, sponsored or included access model</li><li>✓ Known signal problems on site</li></ul></div>
+          <h1>Request a proposal or site survey</h1>
+          <p className="lead">Share the key details of your event or venue so we can prepare an accurate connectivity proposal.</p>
+          <div className="card">
+            <h2>Useful information to include</h2>
+            <ul>
+              <li>✓ Site location and event dates</li>
+              <li>✓ Expected visitor numbers</li>
+              <li>✓ VIP, artist, crew, trader and public areas</li>
+              <li>✓ Preferred access model (paid, sponsored or included)</li>
+              <li>✓ Known mobile signal challenges on site</li>
+            </ul>
+          </div>
         </div>
         <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
           <Field label="Name" />
           <Field label="Organisation" />
           <Field label="Email" type="email" />
           <Field label="Phone" />
-          <label>Event type<select><option>Festival</option><option>Outdoor event</option><option>Bar, café or hospitality venue</option><option>Campsite or holiday park</option><option>Temporary site</option></select></label>
+          <label>Event type
+            <select>
+              <option>Festival</option>
+              <option>Outdoor event</option>
+              <option>Bar, café or hospitality venue</option>
+              <option>Campsite or holiday park</option>
+              <option>Temporary site</option>
+            </select>
+          </label>
           <Field label="Estimated attendance" />
-          <label className="span2">What do you need connected?<textarea placeholder="Tell us about VIP areas, backstage, crew, traders, public WiFi, campsites or remote buildings." /></label>
+          <label className="span2">
+            What do you need connected?
+            <textarea placeholder="Tell us about VIP areas, backstage, crew, artists, traders, public WiFi, campsites or remote buildings." />
+          </label>
           <button className="primary span2">Send enquiry</button>
-          {sent && <p className="success span2">Thanks. Your enquiry details have been captured in this prototype.</p>}
+          {sent && <p className="success span2">Thank you. Your enquiry has been received.</p>}
         </form>
       </section>
     </main>
