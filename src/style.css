@@ -1,403 +1,112 @@
-import React, { useMemo, useState } from 'react';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Exo+2:wght@700&display=swap');
 
-const products = {
-  festival: {
-    title: 'Festival & Event WiFi',
-    kicker: 'Event infrastructure',
-    visual: 'festival',
-    summary: 'Managed high-capacity connectivity for festivals, outdoor venues and high-footfall temporary sites where mobile networks become congested.',
-    ideal: ['Music festivals', 'Food festivals', 'Agricultural shows', 'Sporting events', 'Christmas markets', 'Trader villages'],
-    steps: ['Plan the site around priority zones, visitor numbers and power availability.', 'Install backhaul, access points and the branded SOS WiFi captive portal.', 'Monitor the service and support the organiser during the event.'],
-    benefits: ['Better visitor experience when mobile signal is poor', 'Keeps organisers, traders and production teams connected', 'Supports card payments and operational messaging', 'Can be funded by organisers, users or sponsors', 'Scales by zone, footfall and event size', 'Creates a professional event infrastructure offer'],
-    packages: [
-      ['Zone Connect', 'STARTER', '£10k to £18k', 'Best for campsites, trader zones or production offices.'],
-      ['Event Core', 'MOST POPULAR', '£18k to £35k', 'Balanced coverage for organisers, traders, public and VIP areas.'],
-      ['Full Festival', 'PREMIUM', '£35k to £50k+', 'Multi-zone coverage with commercial access, support and reporting.']
-    ]
-  },
-  vip: {
-    title: 'VIP, Artists & Crew Connectivity',
-    kicker: 'Premium experience',
-    visual: 'vip',
-    summary: 'Dedicated high-speed, always-on internet for VIP lounges, artist compounds, media zones, sponsor areas and production offices — giving your event a clear competitive edge.',
-    ideal: ['VIP guest areas', 'Backstage compounds', 'Artist hospitality', 'Sponsor lounges', 'Crew welfare', 'Production offices'],
-    steps: ['Create private networks for priority event areas.', 'Control access by wristband, voucher, password or captive portal.', 'Prioritise bandwidth for premium users and operational teams.'],
-    benefits: ['Elevates the artist and VIP experience', 'Supports crew and production expectations', 'Keeps operational teams fully connected', 'Creates a visible premium value-add', 'Can be bundled into hospitality packages', 'Reduces pressure on public networks'],
-    packages: [
-      ['VIP Lounge', 'VIP', 'From £12k', 'For one or more hospitality areas with managed access.'],
-      ['Backstage Plus', 'CREW', '£18k to £30k', 'Dedicated backstage, crew, artist and production connectivity.'],
-      ['Premium Estate', 'FULL SERVICE', '£30k+', 'VIP, backstage, sponsor and production zones managed as one service.']
-    ]
-  },
-  revenue: {
-    title: 'Revenue Share WiFi',
-    kicker: 'Commercial model',
-    visual: 'revenue',
-    summary: 'A commercial WiFi model where visitors pay for access and the organiser receives a share of the revenue generated.',
-    ideal: ['Festivals with campsites', 'Holiday parks', 'Outdoor venues', 'Food festivals', 'Large markets', 'Rural visitor attractions'],
-    steps: ['Visitors connect to the SOS WiFi network and land on a branded access page.', 'Visitors choose a 30 minute, 1 hour, day or weekend pass.', 'Revenue is shared with the organiser under an agreed model.'],
-    benefits: ['Creates income rather than just cost', 'Low-barrier option for organisers', 'No need for the venue to run payments', 'Works where mobile networks are overloaded', 'Can be paired with free VIP access', 'Clear commercial story for sales conversations'],
-    packages: [
-      ['Revenue Share', 'NO UPFRONT', 'Revenue split', 'SOS WiFi operates the platform and shares takings with the venue.'],
-      ['Minimum Guarantee', 'BALANCED', 'Fixed plus share', 'Venue receives certainty with upside if sales perform well.'],
-      ['Hybrid Event Model', 'BEST VALUE', 'Custom', 'Festival pays for VIP, crew or trader access while public users pay separately.']
-    ]
-  },
-  hospitality: {
-    title: 'Hospitality, Cafés & Campsites',
-    kicker: 'Venue connectivity',
-    visual: 'hospitality',
-    summary: 'Managed guest WiFi for venues that want to improve customer experience, create a paid access service or offer sponsored connectivity.',
-    ideal: ['Bars and cafés', 'Restaurants', 'Campsites', 'Glamping sites', 'Holiday parks', 'Farm shops and rural venues'],
-    steps: ['Assess buildings, outdoor spaces and customer areas.', 'Install managed WiFi with guest controls and optional paid sessions.', 'Offer WiFi as a perk, paid service or sponsor-funded benefit.'],
-    benefits: ['Better guest experience and dwell time', 'Useful for rural sites with poor mobile signal', 'Optional extra income from paid sessions', 'Professional managed service', 'Seasonal and permanent options', 'Suitable for independent venues and larger parks'],
-    packages: [
-      ['Guest WiFi', 'VENUE PAYS', 'From £750/month', 'Managed WiFi for customer-facing venues.'],
-      ['Paid Guest Access', 'REVENUE', 'Revenue share', 'Customers pay for access and the venue receives a share.'],
-      ['Seasonal Venue', 'SEASONAL', 'Custom', 'For campsites, glamping sites and holiday parks with seasonal demand.']
-    ]
-  },
-  temporary: {
-    title: 'Temporary Internet Deployment',
-    kicker: 'Rapid deployment',
-    visual: 'temporary',
-    summary: 'Fast deployment internet for temporary sites, remote locations and short-term operations that need reliable connectivity quickly.',
-    ideal: ['Pop-up venues', 'Construction compounds', 'Film production', 'Outdoor offices', 'Seasonal attractions', 'Emergency or temporary operations'],
-    steps: ['Identify the best connectivity route for the location.', 'Deploy equipment, WiFi coverage and access controls.', 'Remove, extend or adapt the service as the site changes.'],
-    benefits: ['Quick way to connect temporary locations', 'Avoids relying on weak mobile signal', 'Supports staff, customers and operations', 'Flexible deployment length', 'Can become a permanent solution', 'Useful where fixed infrastructure is not justified'],
-    packages: [
-      ['Rapid Connect', 'FAST SETUP', 'From £5k', 'Short-term connectivity for small sites and pop-up operations.'],
-      ['Operational Site', 'OPERATIONS', '£10k to £25k', 'For compounds, remote offices and larger temporary sites.'],
-      ['Managed Deployment', 'MANAGED', '£25k+', 'For complex temporary networks with support and multiple zones.']
-    ]
-  }
-};
-
-const serviceList = Object.keys(products);
-
-const testimonials = [
-  ['Festival Operations Manager', 'Independent outdoor event', 'SOS WiFi delivered reliable high-speed connectivity for our artists, crew and production teams in an area where mobile networks usually collapse.'],
-  ['Hospitality Lead', 'Weekend music festival', 'The dedicated VIP and backstage network gave our hospitality areas a genuine premium feel and kept everyone connected without relying on the public network.'],
-  ['Venue Owner', 'Rural leisure site', 'The paid-access model allowed us to offer a professional service without taking on the technical management ourselves.']
-];
-
-const helpCards = [
-  { title: 'Festivals & Outdoor Events', page: 'festival', text: 'High-capacity networks engineered for music festivals, food festivals, shows and large temporary sites.' },
-  { title: 'Campsites & Holiday Parks', page: 'hospitality', text: 'Managed seasonal and permanent guest WiFi for campsites, glamping sites and leisure parks.' },
-  { title: 'VIP, Artists & Crew', page: 'vip', text: 'Dedicated high-speed, always-on connectivity for VIP lounges, artist compounds, backstage and production teams.' },
-  { title: 'Traders & Operations', page: 'revenue', text: 'Dependable connectivity that keeps card payments, EPOS systems and operational teams online throughout the event.' },
-  { title: 'Temporary & Remote Sites', page: 'temporary', text: 'Rapid-deployment internet solutions for pop-ups, compounds, film sets and outdoor venues.' }
-];
-
-function money(value) {
-  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value || 0);
+:root{
+  --bg:#1B2430;
+  --bg2:#202B38;
+  --card:#111318;
+  --black:#0A0A0A;
+  --orange:#FF6B1A;
+  --orange2:#FF6A1A;
+  --hover:#FF7A1A;
+  --gold:#F7B733;
+  --pink:#FF4D8D;
+  --muted:#A0A3AD;
+  --white:#fff;
 }
 
-function SOSLogo({ variant = 'hero', showStrapline = true }) {
-  return (
-    <div className={`sos-logo sos-logo-${variant}`}>
-      <div className="sos-logo-container">
-        <div className="sos-mark">
-          <span className="sos-letter">S</span>
-          <span className="sos-lifebuoy">🛟</span>
-          <span className="sos-letter">S</span>
-        </div>
-        <div className="sos-wifi">WI-FI</div>
-      </div>
-      {showStrapline && <p className="sos-lifeline">Event Connectivity Partners</p>}
-    </div>
-  );
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:radial-gradient(ellipse at center,#2c343d 0%,#232a31 45%,#1a2027 75%,#11171e 100%);
+  background-attachment:fixed;
+  color:var(--white);
+  font-family:'Inter',Arial,Helvetica,sans-serif;
 }
 
-export default function App() {
-  const [page, setPage] = useState('home');
-  const [users, setUsers] = useState(1200);
-  const [price, setPrice] = useState(8);
-  const [share, setShare] = useState(30);
-  const [sent, setSent] = useState(false);
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
-  const revenue = useMemo(() => {
-    const gross = Number(users || 0) * Number(price || 0);
-    const venue = gross * (Number(share || 0) / 100);
-    return { gross, venue, sos: gross - venue };
-  }, [users, price, share]);
+.sos-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sos-logo-container{border:3px solid var(--orange2);border-radius:28px;padding:18px 32px;box-shadow:0 0 30px rgba(255,106,26,.3);background:rgba(255,106,26,.05)}
+.sos-mark{display:flex;align-items:center;justify-content:center;font-size:4.7rem;font-weight:900;letter-spacing:-13px;line-height:1}
+.sos-letter{color:var(--orange2)}
+.sos-lifebuoy{font-size:5.3rem;line-height:1;margin:0 2px;animation:beaconPulse 4s ease-in-out infinite}
+@keyframes beaconPulse{0%,100%{filter:drop-shadow(0 0 15px var(--orange2))}50%{filter:drop-shadow(0 0 35px var(--orange2))}}
+.sos-wifi{font-family:'Exo 2',sans-serif;font-weight:700;font-size:2.75rem;letter-spacing:9px;line-height:.85;text-transform:uppercase;color:white;margin-top:-16px}
+.sos-lifeline{color:var(--orange2);text-shadow:0 0 20px rgba(255,106,26,.6);font-weight:600;letter-spacing:3px;font-size:22px;margin:28px 0 0}
+.sos-powered{display:inline-flex;align-items:center;justify-content:center;gap:12px;color:var(--muted);font-size:1rem;font-weight:500;margin-top:14px}
+.sos-logo-nav .sos-logo-container{border-width:2px;border-radius:18px;padding:7px 13px;box-shadow:0 0 18px rgba(255,106,26,.24)}
+.sos-logo-nav .sos-mark{font-size:2rem;letter-spacing:-5px}
+.sos-logo-nav .sos-lifebuoy{font-size:2.25rem;margin:0 2px}
+.sos-logo-nav .sos-wifi{font-size:.9rem;letter-spacing:4px;margin-top:-6px}
+.sos-logo-nav .sos-lifeline{font-size:.48rem;letter-spacing:.15em;margin-top:7px;white-space:nowrap}
+.sos-logo-footer .sos-logo-container{transform:scale(.86);transform-origin:center}
+.sos-logo-footer .sos-lifeline{margin-top:12px}
 
-  const nav = [
-    ['home', 'Home'],
-    ['festival', 'Festivals'],
-    ['vip', 'VIP & Crew'],
-    ['revenue', 'Revenue'],
-    ['hospitality', 'Hospitality'],
-    ['temporary', 'Temporary'],
-    ['contact', 'Contact']
-  ];
+.nav{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:14px 4vw;background:rgba(27,36,48,.96);border-bottom:2px solid var(--orange);box-shadow:0 0 25px rgba(255,107,26,.25)}
+.brand{background:none;border:0;color:white;display:flex;align-items:center;justify-content:center;padding:0;min-width:220px}
+.navlinks{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:8px;min-width:0}
+.navlinks button{border:0;border-radius:999px;background:transparent;color:white;padding:10px 16px;font-weight:900;white-space:nowrap}
+.navlinks button:hover,.navlinks .active{background:var(--orange);box-shadow:0 0 18px rgba(255,107,26,.45)}
+.primary,.secondary{border-radius:18px;padding:14px 22px;font-weight:900;margin:8px 8px 8px 0}
+.primary{border:0;background:var(--orange);color:white;box-shadow:0 0 25px rgba(255,107,26,.35)}
+.primary:hover{background:var(--hover)}
+.secondary{border:2px solid var(--orange);background:#2A1C14;color:white}
+.secondary:hover{background:#3A281D}
+.small{padding:12px 20px;min-width:210px}.block{width:100%;margin-top:20px}
+h1{font-size:clamp(44px,6vw,82px);line-height:1;margin:36px 0 24px}h2{font-size:clamp(32px,4vw,54px);line-height:1.05;margin:10px 0 22px}h3{font-size:26px;margin:10px 0}
+.lead{font-size:20px;line-height:1.7;color:var(--muted);max-width:760px}.badge,.eyebrow{display:inline-block;color:var(--orange);text-transform:uppercase;letter-spacing:.23em;font-weight:900}.gold{color:var(--gold)}
+.hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;padding:90px 5vw;background:radial-gradient(circle at top left,rgba(255,107,26,.25),transparent 35%),radial-gradient(circle at top right,rgba(247,183,51,.18),transparent 30%),linear-gradient(180deg,#1B2430,#202B38 45%,#111827)}
+.hero-new{display:block;text-align:center}.hero-inner{max-width:1200px;margin:auto}.hero-copy{max-width:1000px;margin:auto}.hero-copy .lead{margin-left:auto;margin-right:auto}
+.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:40px auto;max-width:1200px}.benefit-card{background:var(--card);border:1px solid var(--orange2);border-radius:16px;padding:18px;font-weight:600;text-align:center}.hero-buttons{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.section{padding:80px 5vw}.centre-section{text-align:center}.alt{background:var(--bg2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,360px));justify-content:center;gap:28px;margin-top:34px;max-width:1280px;margin-left:auto;margin-right:auto}.three{grid-template-columns:repeat(3,minmax(280px,360px));justify-content:center}
+.who-we-help{display:grid;grid-template-columns:repeat(2,minmax(320px,520px));justify-content:center;gap:28px;max-width:1200px;margin:40px auto 0}.help-card{background:var(--card);border:2px solid var(--orange);border-radius:28px;padding:32px;cursor:pointer;transition:.25s;text-align:center;color:white;box-shadow:0 0 20px rgba(255,107,26,.16)}.help-card:hover{transform:translateY(-4px);box-shadow:0 0 30px rgba(255,107,26,.35)}.help-card h3{margin-top:0;color:var(--orange)}.help-card p{color:var(--muted);line-height:1.7;margin-bottom:0}.who-we-help .help-card:nth-child(5){grid-column:1 / span 2;max-width:520px;justify-self:center}
+.card,.package,.quote,.result,.formbox,form{background:var(--card);border:2px solid var(--orange);border-radius:32px;padding:28px;box-shadow:0 0 20px rgba(255,107,26,.16)}.card:hover,.package:hover{box-shadow:0 0 35px rgba(255,107,26,.35)}.chip,.floating{background:linear-gradient(90deg,var(--orange),var(--gold));color:#000;font-weight:900;border-radius:999px;padding:8px 14px;font-size:12px;text-transform:uppercase;letter-spacing:.12em}.floating{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);white-space:nowrap}.static{position:static;display:inline-block;transform:none;margin-bottom:20px}.card p,.card li,.package li,.quote p{color:var(--muted);line-height:1.6}.package{position:relative;padding-top:44px;text-align:left}.price{font-size:42px;font-weight:900}
 
-  return (
-    <div className="app">
-      <header className="nav">
-        <button className="brand" onClick={() => setPage('home')} aria-label="SOS WiFi home">
-          <SOSLogo variant="nav" showStrapline={true} />
-        </button>
-
-        <div className="navlinks">
-          {nav.map(([id, label]) => (
-            <button key={id} onClick={() => setPage(id)} className={page === id ? 'active' : ''}>
-              {label}
-            </button>
-          ))}
-        </div>
-
-        <button className="primary small" onClick={() => setPage('contact')}>
-          Request a Site Survey
-        </button>
-      </header>
-
-      {page === 'home' && (
-        <Home setPage={setPage} users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} />
-      )}
-      {serviceList.includes(page) && <Product product={products[page]} setPage={setPage} />}
-      {page === 'revenue' && (
-        <Revenue users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} setPage={setPage} />
-      )}
-      {page === 'contact' && <Contact sent={sent} setSent={setSent} />}
-
-      <footer className="footer">
-        <SOSLogo variant="footer" showStrapline={true} />
-        <small>Festivals • Venues • Campsites • Remote locations • Professional event connectivity</small>
-      </footer>
-    </div>
-  );
+/* Revenue section - aligned boxes */
+.revenue {
+  display: grid;
+  grid-template-columns: minmax(280px, 560px) minmax(280px, 560px);
+  justify-content: center;
+  gap: 42px;
+  align-items: stretch;
 }
 
-function Home({ setPage, users, price, share, setUsers, setPrice, setShare, revenue }) {
-  return (
-    <main>
-      <section className="hero hero-new">
-        <div className="hero-inner">
-          <SOSLogo variant="hero" showStrapline={true} />
-          <div className="hero-copy">
-            <h1>Professional Connectivity for Festivals, Venues & Outdoor Events</h1>
-            <p className="lead">
-              SOS WiFi designs, deploys and manages high-capacity internet infrastructure for festivals, campsites and outdoor venues. We specialise in always-on, high-speed connectivity for artists, crew, production teams and VIP areas — giving organisers a clear competitive edge in guest and client experience.
-            </p>
-            <div className="benefit-grid">
-              <div className="benefit-card">Always-on for Crew & Bands</div>
-              <div className="benefit-card">Reliable Operations & Payments</div>
-              <div className="benefit-card">Elevated VIP Experience</div>
-              <div className="benefit-card">Revenue-Generating Access</div>
-            </div>
-            <div className="hero-buttons">
-              <button className="primary" onClick={() => setPage('contact')}>Request a Site Survey</button>
-              <button className="secondary" onClick={() => setPage('revenue')}>Explore Commercial Models</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section centre-section">
-        <p className="eyebrow">Who We Work With</p>
-        <h2>Connectivity solutions designed for event organisers and venue operators</h2>
-        <div className="who-we-help">
-          {helpCards.map(card => (
-            <button key={card.title} className="help-card" onClick={() => setPage(card.page)}>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <Pricing setPage={setPage} />
-      <Revenue users={users} price={price} share={share} setUsers={setUsers} setPrice={setPrice} setShare={setShare} revenue={revenue} setPage={setPage} />
-      <Testimonials />
-      <CTA setPage={setPage} />
-    </main>
-  );
+.revenue-box {
+  background: var(--card);
+  border: 2px solid var(--orange);
+  border-radius: 32px;
+  padding: 28px;
+  box-shadow: 0 0 20px rgba(255, 107, 26, 0.16);
+  display: flex;
+  flex-direction: column;
 }
 
-function Pricing({ setPage }) {
-  const pkgs = [
-    ['Essential Event Network', 'STARTER', '£10k to £18k', ['Core event WiFi zones', 'Trader and organiser connectivity', 'Captive portal and basic support']],
-    ['Premium Festival Network', 'MOST POPULAR', '£18k to £35k', ['VIP, backstage and public access options', 'Dedicated network planning', 'Revenue share or sponsor-funded access']],
-    ['Full Event Connectivity Partner', 'PREMIUM', '£35k to £50k+', ['Multi-zone festival coverage', 'VIP, crew, trader and guest services', 'Reporting and post-event review']]
-  ];
-
-  return (
-    <section className="section alt centre-section">
-      <p className="eyebrow gold">Commercial Packages</p>
-      <h2>Flexible solutions from £10k to £50k+ event contracts</h2>
-      <div className="cards three">
-        {pkgs.map(([name, badge, price, items]) => <Package key={name} name={name} badge={badge} price={price} items={items} setPage={setPage} />)}
-      </div>
-    </section>
-  );
+.revenue-box .formbox {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 12px;
+  flex: 1;
 }
 
-function Package({ name, badge, price, items, setPage }) {
-  return (
-    <article className="package">
-      <span className="floating">{badge}</span>
-      <h3>{name}</h3>
-      <div className="price">{price}</div>
-      <ul>{items.map(x => <li key={x}>✓ {x}</li>)}</ul>
-      <button className="primary block" onClick={() => setPage('contact')}>Discuss this package</button>
-    </article>
-  );
+.revenue .result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-function Revenue({ users, price, share, setUsers, setPrice, setShare, revenue, setPage }) {
-  return (
-    <section className="section revenue">
-      <div className="revenue-box">
-        <p className="eyebrow gold">Commercial Model</p>
-        <h2>Turn connectivity into a revenue opportunity</h2>
-        <p className="lead" style={{ marginBottom: 8 }}>
-          Model how a professionally managed paid-access WiFi service can generate additional income for your festival or venue under a transparent revenue-share arrangement.
-        </p>
-
-        <div className="formbox">
-          <label>
-            Expected paying users
-            <input type="number" value={users} onChange={e => setUsers(e.target.value)} />
-          </label>
-          <label>
-            Average session price (£)
-            <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
-          </label>
-          <label>
-            Venue revenue share (%)
-            <input type="number" value={share} onChange={e => setShare(e.target.value)} />
-          </label>
-        </div>
-      </div>
-
-      <div className="result revenue-box">
-        <div>
-          <span className="floating static">Example event return</span>
-          <small>Total gross revenue</small>
-          <strong>{money(revenue.gross)}</strong>
-
-          <div className="split">
-            <p>
-              <small>Venue share</small>
-              <b>{money(revenue.venue)}</b>
-            </p>
-            <p>
-              <small>SOS WiFi share</small>
-              <b>{money(revenue.sos)}</b>
-            </p>
-          </div>
-        </div>
-
-        <button className="primary block" onClick={() => setPage('contact')}>
-          Build this into my proposal
-        </button>
-      </div>
-    </section>
-  );
+.revenue .result .split {
+  margin: 20px 0 24px;
 }
 
-function Testimonials() {
-  return (
-    <section className="section centre-section">
-      <p className="eyebrow">Client Feedback</p>
-      <h2>Designed for the real demands of live events</h2>
-      <div className="cards three">
-        {testimonials.map(([name, detail, quote]) => (
-          <blockquote className="quote" key={name}>
-            <div>“</div>
-            <p>{quote}</p>
-            <footer><strong>{name}</strong><small>{detail}</small></footer>
-          </blockquote>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function CTA({ setPage }) {
-  return (
-    <section className="cta">
-      <h2>Ready to strengthen connectivity at your next event?</h2>
-      <p>Tell us about your site, expected attendance and the areas you need to connect — including VIP, artists and crew.</p>
-      <button onClick={() => setPage('contact')}>Start an enquiry</button>
-    </section>
-  );
-}
-
-function Product({ product, setPage }) {
-  return (
-    <main>
-      <section className="product-hero">
-        <div>
-          <button className="back" onClick={() => setPage('home')}>← Back to services</button>
-          <p className="eyebrow">{product.kicker}</p>
-          <h1>{product.title}</h1>
-          <p className="lead">{product.summary}</p>
-          <button className="primary" onClick={() => setPage('contact')}>Request a proposal</button>
-          <button className="secondary" onClick={() => setPage('revenue')}>View commercial model</button>
-        </div>
-        <div className={'visual ' + product.visual}><span>Professional event network</span></div>
-      </section>
-
-      <section className="section alt grid-two">
-        <div className="card"><h2>Who it is for</h2><ul>{product.ideal.map(x => <li key={x}>✓ {x}</li>)}</ul></div>
-        <div className="card wide"><h2>How it works</h2><div className="steps">{product.steps.map((x, i) => <p key={x}><b>{i + 1}</b>{x}</p>)}</div></div>
-      </section>
-
-      <section className="section centre-section"><h2>Benefits</h2><div className="benefits">{product.benefits.map(x => <p key={x}>✓ {x}</p>)}</div></section>
-      <section className="section alt centre-section"><h2>Example packages</h2><div className="cards three">{product.packages.map(([name, badge, price, text]) => <Package key={name} name={name} badge={badge} price={price} items={[text]} setPage={setPage} />)}</div></section>
-      <CTA setPage={setPage} />
-    </main>
-  );
-}
-
-function Contact({ sent, setSent }) {
-  return (
-    <main>
-      <section className="contact">
-        <div>
-          <p className="eyebrow">Enquiry</p>
-          <h1>Request a proposal or site survey</h1>
-          <p className="lead">Share the key details of your event or venue so we can prepare an accurate connectivity proposal.</p>
-          <div className="card">
-            <h2>Useful information to include</h2>
-            <ul>
-              <li>✓ Site location and event dates</li>
-              <li>✓ Expected visitor numbers</li>
-              <li>✓ VIP, artist, crew, trader and public areas</li>
-              <li>✓ Preferred access model (paid, sponsored or included)</li>
-              <li>✓ Known mobile signal challenges on site</li>
-            </ul>
-          </div>
-        </div>
-        <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
-          <Field label="Name" />
-          <Field label="Organisation" />
-          <Field label="Email" type="email" />
-          <Field label="Phone" />
-          <label>Event type
-            <select>
-              <option>Festival</option>
-              <option>Outdoor event</option>
-              <option>Bar, café or hospitality venue</option>
-              <option>Campsite or holiday park</option>
-              <option>Temporary site</option>
-            </select>
-          </label>
-          <Field label="Estimated attendance" />
-          <label className="span2">
-            What do you need connected?
-            <textarea placeholder="Tell us about VIP areas, backstage, crew, artists, traders, public WiFi, campsites or remote buildings." />
-          </label>
-          <button className="primary span2">Send enquiry</button>
-          {sent && <p className="success span2">Thank you. Your enquiry has been received.</p>}
-        </form>
-      </section>
-    </main>
-  );
-}
-
-function Field({ label, type = 'text' }) {
-  return <label>{label}<input type={type} /></label>;
-}
+.formbox label,form label{display:block;color:#fff;font-weight:800;margin:12px 0;text-align:left}.formbox input,form input,form select,form textarea{width:100%;margin-top:8px;border:1px solid var(--orange);border-radius:12px;background:var(--black);color:#fff;padding:13px}textarea{min-height:130px}.result strong{display:block;font-size:54px;margin:10px 0 20px}.result small{color:var(--muted)}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.split p{border:1px solid var(--orange);border-radius:18px;background:var(--black);padding:18px}.split b{display:block;color:var(--gold);font-size:28px}.quote{text-align:left}.quote div{font-size:64px;color:var(--orange);font-weight:900;line-height:.6}.quote footer{border-top:1px solid rgba(255,107,26,.45);margin-top:24px;padding-top:18px}.quote strong{display:block;color:var(--gold)}.quote small{color:var(--muted)}
+.cta{text-align:center;padding:90px 5vw;background:linear-gradient(135deg,var(--orange),#7A4127,var(--card))}.cta p{font-size:22px}.cta button{border:0;border-radius:18px;background:var(--card);color:#fff;font-weight:900;padding:16px 28px}
+.product-hero{display:grid;grid-template-columns:minmax(280px,620px) minmax(280px,520px);justify-content:center;gap:48px;align-items:center;padding:80px 5vw}.back{border:1px solid var(--orange);background:var(--card);color:white;border-radius:999px;padding:10px 16px}.visual{min-height:360px;border:2px solid var(--orange);border-radius:32px;background:linear-gradient(135deg,var(--orange),var(--gold),var(--bg));position:relative;overflow:hidden;box-shadow:0 0 35px rgba(255,107,26,.25)}.visual:after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,var(--card))}.visual span{position:absolute;right:24px;top:24px;border:1px solid var(--orange);border-radius:999px;background:rgba(42,28,20,.9);padding:10px 15px;font-weight:900}.vip{background:linear-gradient(135deg,var(--pink),var(--orange),var(--card))}.revenue.visual{background:linear-gradient(135deg,var(--gold),var(--orange),var(--card))}.hospitality{background:linear-gradient(135deg,var(--gold),var(--hover),var(--bg))}.temporary{background:linear-gradient(135deg,var(--orange),var(--bg2),var(--black))}
+.grid-two{display:grid;grid-template-columns:minmax(280px,420px) minmax(280px,760px);justify-content:center;gap:28px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}.steps p{border:1px solid var(--orange);border-radius:18px;background:var(--black);padding:18px;color:var(--muted)}.steps b{display:grid;place-items:center;width:34px;height:34px;background:var(--orange);border-radius:50%;margin-bottom:12px;color:white}.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,340px));justify-content:center;gap:18px;max-width:1200px;margin:30px auto 0}.benefits p{border:1px solid var(--orange);border-radius:18px;background:var(--card);padding:18px;color:var(--muted);text-align:center}
+.contact{display:grid;grid-template-columns:minmax(280px,520px) minmax(280px,680px);justify-content:center;gap:48px;padding:80px 5vw}form{display:grid;grid-template-columns:1fr 1fr;gap:18px}.span2{grid-column:span 2}.success{border:1px solid var(--gold);background:#2A1C14;color:var(--gold);border-radius:16px;padding:16px}.footer{text-align:center;background:var(--black);border-top:2px solid var(--orange);padding:46px 5vw}.footer small{display:block;color:var(--muted);margin-top:14px}
+@media(max-width:1200px){.nav{grid-template-columns:1fr;justify-items:center;gap:14px}.navlinks{flex-wrap:wrap;max-width:760px}.navlinks button{min-width:135px}.small{min-width:260px}}
+@media(max-width:900px){.hero,.product-hero,.revenue,.contact,.grid-two{grid-template-columns:1fr}.nav{align-items:center}.navlinks{display:grid;grid-template-columns:repeat(2,1fr);width:100%}.navlinks button{width:100%;min-width:0}.result strong{font-size:42px}form{grid-template-columns:1fr}.span2{grid-column:auto}.benefit-grid{grid-template-columns:1fr}.sos-logo-hero .sos-mark{font-size:3.8rem;letter-spacing:-10px}.sos-logo-hero .sos-lifebuoy{font-size:4.4rem}.sos-logo-hero .sos-wifi{font-size:2rem;letter-spacing:7px}.sos-logo-hero .sos-logo-container{padding:14px 22px}.sos-logo-nav .sos-mark{font-size:1.85rem}.sos-logo-nav .sos-lifebuoy{font-size:2.05rem}.sos-logo-nav .sos-wifi{font-size:.76rem;margin-top:-4px}.sos-logo-nav .sos-lifeline{font-size:.42rem}.who-we-help{grid-template-columns:1fr}.who-we-help .help-card:nth-child(5){grid-column:auto;max-width:none}.three{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
